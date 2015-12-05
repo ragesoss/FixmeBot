@@ -1,6 +1,7 @@
 class Datacycle
   def self.keepgrabbing
     i = 0
+    pp "PID #{Process.pid}"
     loop do
       i += 1
       pp "starting cycle #{i}"
