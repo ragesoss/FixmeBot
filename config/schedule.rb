@@ -21,6 +21,5 @@
 set :output, 'log/tweet.log'
 
 every 2.hours do
-  Tweet.the_last_article
-  Rails.logger.info "#{article.title} tweeted"
+  runner 'Tweet.the_last_article', :environment => 'development'
 end
