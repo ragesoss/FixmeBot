@@ -13,6 +13,7 @@ class HighPageviews
 
     timestamp = Time.now.utc
     update_average_views(articles, average_views, timestamp)
+    articles.reject! { |article| article.average_views.nil? }
     articles.select! { |article| article.average_views > min_views }
     articles
   end
