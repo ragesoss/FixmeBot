@@ -1,12 +1,13 @@
 class Datacycle
   def self.keepgrabbing
+    sleep 5
     Rails.logger.info "Datacycle started: PID #{Process.pid}"
 
     i = 0
     loop do
       i += 1
       Rails.logger.info "starting cycle #{i}..."
-      articles = FindArticles.at_random(count: 1000)
+      articles = FindArticles.at_random(count: 10000)
       Rails.logger.info "#{articles.count} mainspace articles found"
       articles = DiscardRedirects.from(articles)
       Rails.logger.info "#{articles.count} are not redirects"

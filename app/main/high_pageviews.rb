@@ -3,13 +3,17 @@ require "#{Rails.root}/app/main/wiki_pageviews"
 class HighPageviews
   def self.from_among(articles, min_views: 300)
     average_views = {}
-    threads = articles.each_with_index.map do |article, i|
-      Thread.new(i) do
-        title = article.title.tr(' ', '_')
-        average_views[article.id] = WikiPageviews.average_views_for_article(title)
+
+    articles.each_slice(50) do |fifty_articles|
+      threads = fifty_articles.each_with_index.map do |article, i|
+        Thread.new(i) do
+          title = article.title.tr(' ', '_')
+          average_views[article.id] = WikiPageviews.average_views_for_article(title)
+        end
       end
+      threads.each(&:join)
+      Rails.logger.info "#{average_views.count} articles-views collected"
     end
-    threads.each(&:join)
 
     timestamp = Time.now.utc
     update_average_views(articles, average_views, timestamp)

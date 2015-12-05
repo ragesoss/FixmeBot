@@ -27,6 +27,7 @@ class FindArticles
     # As of December 2015, recently created articles have page ids under
     # 50_000_000.
     ids = count.times.map { Random.rand(60_000_000) }
+    Rails.logger.info "looking for up to #{count} articles"
     by_ids(ids)
   end
 
@@ -43,11 +44,18 @@ class FindArticles
 
   def self.get_pages(article_ids)
     pages = {}
-    article_ids.each_slice(50) do |fifty_ids|
-      rev_query = revisions_query(fifty_ids)
-      rev_response = Wiki.query rev_query
-      pages.merge! rev_response.data['pages']
+    threads = article_ids.in_groups(10, false).each_with_index.map do |group_of_ids, i|
+      Thread.new(i) do
+        pages = {}
+        group_of_ids.each_slice(50) do |fifty_ids|
+          rev_query = revisions_query(fifty_ids)
+          rev_response = Wiki.query rev_query
+          pages.merge! rev_response.data['pages']
+        end
+      end
     end
+
+    threads.each(&:join)
     pages.values
   end
 end
