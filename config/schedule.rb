@@ -20,6 +20,10 @@
 # Learn more: http://github.com/javan/whenever
 set :output, 'log/tweet.log'
 
+every 6.minutes do
+  runner 'Datacycle.times(2)'
+end
+
 every 2.hours do
   runner 'Tweet.the_last_article'
 end
