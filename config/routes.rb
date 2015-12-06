@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get ':title' => 'article#show'
 
+  get '/' => 'article#show'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
