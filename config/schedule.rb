@@ -21,5 +21,5 @@
 set :output, 'log/tweet.log'
 
 every 2.hours do
-  runner 'Tweet.the_last_article', :environment => 'development'
+  runner 'Tweet.the_last_article'
 end
