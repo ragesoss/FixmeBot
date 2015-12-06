@@ -7,6 +7,7 @@ class Tweet
                      .where(tweeted: nil)
                      .last
     article.tweet
+    Rails.logger.info "Tweeted #{article.title}"
   end
 
   def initialize(tweet)
