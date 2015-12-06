@@ -11,7 +11,7 @@ class Datacycle
   end
 
   def self.times(count)
-    count.times do |i|
+    (1..count).times do |i|
       cycle(i)
     end
   end
