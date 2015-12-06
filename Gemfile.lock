@@ -146,6 +146,9 @@ GEM
     notiffany (0.0.8)
       nenv (~> 0.1)
       shellany (~> 0.0)
+    passenger (5.0.21)
+      rack
+      rake (>= 0.8.1)
     pry (0.10.3)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -267,6 +270,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   mediawiki_api
+  passenger
   pry-rails
   rails (= 4.2.5)
   sass-rails (~> 5.0)

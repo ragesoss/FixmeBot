@@ -5,6 +5,7 @@ gem 'mediawiki_api'
 gem 'twitter'
 gem 'whenever'
 gem 'figaro'
+gem 'passenger'
 
 gem 'activerecord-import'
 
