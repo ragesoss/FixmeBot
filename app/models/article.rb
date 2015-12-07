@@ -1,6 +1,6 @@
 class Article < ActiveRecord::Base
   def tweet
-    make_screenshot
+    # make_screenshot
     Tweet.new(tweet_text)
     self.tweeted = true
     save
