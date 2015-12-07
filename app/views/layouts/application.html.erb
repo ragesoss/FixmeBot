@@ -5,9 +5,9 @@
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:site" content="@FixmeBot" />
-  <meta name="twitter:title" content="The Mountain is Out" />
-  <meta name="twitter:description" content="Check out this awesome thing." />
-  <meta name="twitter:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Mt._Rainier%2C_black_and_white_from_airplane.jpg/640px-Mt._Rainier%2C_black_and_white_from_airplane.jpg" />
+  <meta name="twitter:title" content="[[<%= @article.title %>]]" />
+  <meta name="twitter:description" content="<%= @article.twitter_card_description %>" />
+  <meta name="twitter:image" content="<%= @article.screenshot_path %>" />
 </head>
 <body>
 

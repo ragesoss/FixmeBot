@@ -1,20 +1,49 @@
 class Article < ActiveRecord::Base
-  def url
-    escaped_title = self.title.tr(' ', '_')
-    "https://en.wikipedia.org/wiki/#{escaped_title}"
-  end
-
-  def tweet_text
-    title = self.title
-    views = self.average_views.to_i
-    quality = self.wp10.to_i
-    # title + 2 + views + 31 + [1-2] + 6 + 23 + 1 + 6 =
-    "\"#{title}\": #{views} views per day, quality rating #{quality}/100. #{url} #fixme"
-  end
-
   def tweet
+    make_screenshot
     Tweet.new(tweet_text)
     self.tweeted = true
     save
+  end
+
+  def screenshot_path
+    "screenshots/#{escaped_title}.png"
+  end
+
+  def twitter_card_description
+    "#{views} views per day, with a quality rating of #{quality}/100. This article needs help."
+  end
+
+  private
+
+  def escaped_title
+    title.tr(' ', '_')
+  end
+
+  def views
+    average_views.to_i
+  end
+
+  def quality
+    wp10.to_i
+  end
+
+  def url
+    "https://en.wikipedia.org/wiki/#{escaped_title}"
+  end
+
+  def mobile_url
+    "https://en.m.wikipedia.org/wiki/#{escaped_title}"
+  end
+
+  def make_screenshot
+    webshot = Webshot::Screenshot.instance
+    webshot.capture mobile_url, "public/#{screenshot_path}",
+                    width: 800, height: 800
+  end
+
+  def tweet_text
+    # title + 2 + views + 31 + [1-2] + 6 + 23 + 1 + 6 =
+    "\"#{title}\": #{views} views per day, quality rating #{quality}/100. #{url} #fixme"
   end
 end

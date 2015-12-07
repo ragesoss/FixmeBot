@@ -6,6 +6,7 @@ gem 'twitter'
 gem 'whenever'
 gem 'figaro'
 gem 'passenger'
+gem 'webshot'
 
 gem 'activerecord-import'
 
