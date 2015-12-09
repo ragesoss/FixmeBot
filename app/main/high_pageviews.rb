@@ -12,7 +12,6 @@ class HighPageviews
         end
       end
       threads.each(&:join)
-      Rails.logger.info "#{average_views.count} articles-views collected"
     end
 
     timestamp = Time.now.utc

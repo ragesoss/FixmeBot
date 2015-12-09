@@ -27,7 +27,6 @@ class FindArticles
     # As of December 2015, recently created articles have page ids under
     # 50_000_000.
     ids = count.times.map { Random.rand(60_000_000) }
-    Rails.logger.info "looking for up to #{count} articles"
     by_ids(ids)
   end
 
