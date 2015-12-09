@@ -8,7 +8,7 @@ gem 'figaro'
 gem 'passenger'
 
 # requires manual installation of phantomJS 1.9.*: https://gist.github.com/julionc/7476620
-gem 'webshot'
+gem 'webshot', git: 'https://github.com/ragesoss/webshot.git'
 
 gem 'activerecord-import'
 

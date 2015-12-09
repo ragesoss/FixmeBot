@@ -1,3 +1,13 @@
+GIT
+  remote: https://github.com/ragesoss/webshot.git
+  revision: 0c1b47a52d99023c1cbb9969c3e3934edd1805cc
+  specs:
+    webshot (0.0.9)
+      activesupport
+      faye-websocket (~> 0.7.3)
+      mini_magick (~> 4.3.3)
+      poltergeist (~> 1.6.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -267,11 +277,6 @@ GEM
       binding_of_caller (>= 0.7.2)
       railties (>= 4.0)
       sprockets-rails (>= 2.0, < 4.0)
-    webshot (0.0.9)
-      activesupport
-      faye-websocket (~> 0.7.3)
-      mini_magick (~> 4.3.3)
-      poltergeist (~> 1.6.0)
     websocket-driver (0.6.3)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
@@ -307,7 +312,7 @@ DEPENDENCIES
   twitter
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
-  webshot
+  webshot!
   whenever
 
 BUNDLED WITH
