@@ -39,7 +39,7 @@ class Article < ActiveRecord::Base
   def make_screenshot
     webshot = Webshot::Screenshot.instance
     webshot.capture mobile_url, "public/#{screenshot_path}",
-                    width: 800, height: 800
+                    width: 800, height: 800, allowed_status_codes: [404]
   end
 
   def tweet_text
