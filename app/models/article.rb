@@ -33,7 +33,7 @@ class Article < ActiveRecord::Base
   end
 
   def mobile_url
-    "https://en.m.wikipedia.org/wiki/#{escaped_title}"
+    "https://en.m.wikipedia.org/wiki/#{CGI.escape(escaped_title)}"
   end
 
   def make_screenshot
