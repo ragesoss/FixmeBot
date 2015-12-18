@@ -11,6 +11,11 @@ class Wiki
     wikipedia('query', query_parameters, opts)
   end
 
+  def self.get_page_content(page_title, opts = {})
+    response = wikipedia('get_wikitext', page_title, opts)
+    response.status == 200 ? response.body : nil
+  end
+
   ###################
   # Private methods #
   ###################

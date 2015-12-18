@@ -25,6 +25,9 @@ class Datacycle
     articles = HighPageviews.from_among(articles, min_views: 300)
     Rails.logger.info "#{articles.count} of those have high page views"
     articles = Ores.discard_high_revision_scores(articles, max_wp10: 30)
+    Rails.logger.info "#{articles.count} of those have low revision scores"
+    articles = CategoryFilter.discard_disambiguation_pages(articles)
+    Rails.logger.info "#{articles.count} of those are not disambiguation pages"
     if articles.count > 0
       Rails.logger.info "#{articles.count} tweetable prospect(s) found!"
     else

@@ -9,6 +9,10 @@ class Ores
     articles
   end
 
+  ###############
+  # Other stuff #
+  ###############
+
   # This should take up to 50 rev_ids per batch
   def self.add_revision_scores(articles)
     scores = {}
