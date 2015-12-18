@@ -35,7 +35,7 @@ class Tweet
   # Helpers #
   ###########
 
-  def coin_flip
+  def self.coin_flip
     [true, false][rand(2)]
   end
 end
