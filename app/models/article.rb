@@ -1,4 +1,25 @@
 class Article < ActiveRecord::Base
+  #################
+  # Class methods #
+  #################
+
+  def self.last_tweetable
+    tweetable.last
+  end
+
+  def self.first_tweetable
+    tweetable.first
+  end
+
+  def self.tweetable
+    where('wp10 < ?', 25)
+      .where('average_views > ?', 200)
+      .where(tweeted: nil)
+  end
+
+  ####################
+  # Instance methods #
+  ####################
   def tweet
     # make_screenshot
     Tweet.new(tweet_text)

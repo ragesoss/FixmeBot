@@ -24,6 +24,6 @@ every 6.minutes do
   runner 'Datacycle.times(2)'
 end
 
-every 2.hours do
-  runner 'Tweet.the_last_article'
+every 1.hour do
+  runner 'Tweet.anything'
 end
