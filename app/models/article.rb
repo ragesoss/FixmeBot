@@ -36,7 +36,7 @@ class Article < ActiveRecord::Base
   end
 
   private
-
+  # CGI.escape will convert spaces to '+' which will break the URL
   def escaped_title
     title.tr(' ', '_')
   end
@@ -50,7 +50,7 @@ class Article < ActiveRecord::Base
   end
 
   def url
-    "https://en.wikipedia.org/wiki/#{escaped_title}"
+    "https://en.wikipedia.org/wiki/#{CGI.escape(escaped_title)}"
   end
 
   def mobile_url
