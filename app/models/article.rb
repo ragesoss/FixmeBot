@@ -36,9 +36,10 @@ class Article < ActiveRecord::Base
   end
 
   private
-  # CGI.escape will convert spaces to '+' which will break the URL
+
   def escaped_title
-    title.tr(' ', '_')
+    # CGI.escape will convert spaces to '+' which will break the URL
+    CGI.escape(title.tr(' ', '_'))
   end
 
   def views
@@ -50,11 +51,11 @@ class Article < ActiveRecord::Base
   end
 
   def url
-    "https://en.wikipedia.org/wiki/#{CGI.escape(escaped_title)}"
+    "https://en.wikipedia.org/wiki/#{escaped_title}"
   end
 
   def mobile_url
-    "https://en.m.wikipedia.org/wiki/#{CGI.escape(escaped_title)}"
+    "https://en.m.wikipedia.org/wiki/#{escaped_title}"
   end
 
   def make_screenshot
