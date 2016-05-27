@@ -5,6 +5,7 @@ class Ores
   ################
   def self.discard_high_revision_scores(articles, max_wp10: 30)
     add_revision_scores(articles)
+    articles.select! { |article| !article.wp10.nil? }
     articles.select! { |article| article.wp10 < max_wp10 }
     articles
   end
