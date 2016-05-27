@@ -66,6 +66,7 @@ class Article < ActiveRecord::Base
 
   def tweet_text
     # title + 2 + views + 31 + [1-2] + 6 + 23 + 1 + 6 =
-    "\"#{title}\": #{views} views per day, quality rating #{quality}/100. #{url} #fixme"
+    shortened_title = title.truncate(60)
+    "\"#{shortened_title}\": #{views} views per day, quality rating #{quality}/100. #{url} #fixme"
   end
 end
