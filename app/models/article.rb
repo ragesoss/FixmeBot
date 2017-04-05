@@ -58,6 +58,10 @@ class Article < ActiveRecord::Base
     "https://en.m.wikipedia.org/wiki/#{escaped_title}"
   end
 
+  def edit_url
+    "https://en.wikipedia.org/wiki/#{escaped_title}?veaction=edit&summary=%23FixmeBot"
+  end
+
   def make_screenshot
     webshot = Webshot::Screenshot.instance
     webshot.capture mobile_url, "public/#{screenshot_path}",
@@ -67,6 +71,6 @@ class Article < ActiveRecord::Base
   def tweet_text
     # title + 2 + views + 31 + [1-2] + 6 + 23 + 1 + 6 =
     shortened_title = title.truncate(60)
-    "\"#{shortened_title}\": #{views} views per day, quality rating #{quality}/100. #{url} #fixme"
+    "\"#{shortened_title}\": #{views} views per day, quality rating #{quality}/100. #{edit_url} #fixme"
   end
 end
