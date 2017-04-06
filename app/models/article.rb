@@ -68,6 +68,8 @@ class Article < ActiveRecord::Base
   end
 
   def edit_url
+    # Includes the summary preload #FixmeBot, so that edits can be tracked:
+    # http://tools.wmflabs.org/hashtags/search/fixmebot
     "https://en.wikipedia.org/wiki/#{escaped_title}?veaction=edit&summary=%23FixmeBot"
   end
 
