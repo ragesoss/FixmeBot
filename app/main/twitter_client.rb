@@ -15,9 +15,15 @@ class TwitterClient
   end
 
   def related_hashtags(search_query)
+    # Get the text of up to 200 tweets from the search query.
+    # Twitter may return fewer, even zero, results.
     @texts = @client.search(search_query).first(200).map(&:text)
-    @hashtags = Hash.new { |h, k| h[k] = 0 }
+    # We only care about the ones with hashtags
     @texts.select! { |text| text.match(/#/) }
+
+    # Count the occurences of every hashtag in the search results by building
+    # a frequency hash.
+    @hashtags = Hash.new { |h, k| h[k] = 0 }
     @texts.each do |text|
       hashtags_in(text).each do |hashtag|
         @hashtags[hashtag] += 1
