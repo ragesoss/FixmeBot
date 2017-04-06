@@ -35,6 +35,15 @@ class Article < ActiveRecord::Base
     "#{views} views per day, with a quality rating of #{quality}/100. This article needs help."
   end
 
+  def tweet_text
+    # title + 2 + views + 31 + [1-2] + 6 + 23 + 1 + 6 =
+    ht = hashtag || ''
+    body = "\": #{views} views/day, #{quality}% complete. "
+    size = 1 + body.size + 24 + ht.size
+    shortened_title = title.truncate(138 - size)
+    "\"#{shortened_title}#{body}#{edit_url} #{ht}"
+  end
+
   private
 
   def escaped_title
@@ -68,9 +77,7 @@ class Article < ActiveRecord::Base
                     width: 800, height: 800, allowed_status_codes: [404]
   end
 
-  def tweet_text
-    # title + 2 + views + 31 + [1-2] + 6 + 23 + 1 + 6 =
-    shortened_title = title.truncate(60)
-    "\"#{shortened_title}\": #{views} views per day, quality rating #{quality}/100. #{edit_url} #fixme"
+  def hashtag
+    TwitterClient.new.top_hashtag(title)
   end
 end
