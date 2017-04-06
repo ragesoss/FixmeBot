@@ -21,7 +21,7 @@ class Tweet
   # Twitter API #
   ###############
   def initialize(tweet)
-    TwitterClient.new.client.update(client.update(tweet))
+    TwitterClient.new.client.update(tweet)
   end
 
   ###########
