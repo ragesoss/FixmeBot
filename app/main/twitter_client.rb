@@ -16,7 +16,6 @@ class TwitterClient
 
   def related_hashtags(search_query)
     @texts = @client.search(search_query).first(200).map(&:text)
-    pp @texts
     @hashtags = Hash.new { |h, k| h[k] = 0 }
     @texts.select! { |t| t.match(/#/) }
     @texts.each do |text|
