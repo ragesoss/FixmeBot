@@ -11,6 +11,9 @@ gem 'webshot', git: 'https://github.com/ragesoss/webshot.git'
 
 gem 'activerecord-import'
 
+# Latest from github fixes ARM bug
+gem 'unf_ext', github: 'knu/ruby-unf_ext'
+
 gem 'rails', '4.2.5'
 gem 'sqlite3'
 gem 'sass-rails', '~> 5.0'
