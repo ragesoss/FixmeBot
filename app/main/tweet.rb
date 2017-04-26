@@ -21,7 +21,9 @@ class Tweet
   # Twitter API #
   ###############
   def initialize(tweet)
-    TwitterClient.new.client.update(tweet)
+    tc = TwitterClient.new
+    tc.client.update(tweet)
+    tc.add_id_to_tweeted_articles
   end
 
   ###########
