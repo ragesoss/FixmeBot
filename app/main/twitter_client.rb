@@ -44,4 +44,13 @@ class TwitterClient
       article.save
     end
   end
+
+  def import_recent_retweets
+    client.retweets_of_me.each do |rt|
+      client.retweeters_of(rt).each do |user|
+        # create a Reaction
+        # reply to rt and user
+      end
+    end
+  end
 end
