@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151204055214) do
+ActiveRecord::Schema.define(version: 20170426022646) do
 
   create_table "articles", force: :cascade do |t|
     t.string   "title"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20151204055214) do
     t.datetime "updated_at",               null: false
     t.boolean  "tweeted"
     t.boolean  "redirect"
+    t.integer  "twitter_status_id"
   end
 
 end

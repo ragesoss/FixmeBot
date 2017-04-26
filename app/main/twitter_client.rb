@@ -35,4 +35,13 @@ class TwitterClient
   def hashtags_in(text)
     text.scan(/\s(#\w+)/).flatten
   end
+
+  def add_id_to_tweeted_articles
+    client.user_timeline('@FixmeBot').each do |t|
+      title = t.text[/"(.*)":/, 1]
+      article = Article.find_by(title: title)
+      article.twitter_status_id = t.id
+      article.save
+    end
+  end
 end
