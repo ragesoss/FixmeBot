@@ -43,9 +43,9 @@ class TwitterClient
   end
 
   def add_id_to_article(tweet)
-    title = t.text[/"(.*)":/, 1]
+    title = tweet.text[/"(.*)":/, 1]
     article = Article.find_by(title: title)
-    article.twitter_status_id = t.id
+    article.twitter_status_id = tweet.id
     article.save
     return article
   end
