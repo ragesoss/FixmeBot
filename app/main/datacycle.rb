@@ -18,7 +18,7 @@ class Datacycle
 
   def self.cycle(i)
     Rails.logger.debug "starting cycle #{i}..."
-    articles = FindArticles.at_random(count: 10000)
+    articles = FindArticles.recent_at_random(count: 10000)
     Rails.logger.debug "#{articles.count} mainspace articles found"
     articles = DiscardRedirects.from(articles)
     Rails.logger.debug "#{articles.count} are not redirects"

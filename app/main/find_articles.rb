@@ -30,6 +30,11 @@ class FindArticles
     by_ids(ids)
   end
 
+  def self.recent_at_random(count: 100)
+    ids = count.times.map { Random.rand(50_000_000..60_000_000) }
+    by_ids(ids)
+  end
+
   ####################
   # Internal methods #
   ####################
