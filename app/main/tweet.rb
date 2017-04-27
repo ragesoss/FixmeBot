@@ -1,4 +1,5 @@
 require 'twitter'
+require 'pp'
 
 # Finds tweetable articles, tweets them
 class Tweet
