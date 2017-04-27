@@ -68,6 +68,6 @@ class TwitterClient
     }
     article = add_id_to_article(tweet)
     text = "@#{user.screen_name} thanks for the RT! Can you improve it? #{article.edit_url}"
-    client.update!(opts, text)
+    client.update!(text, opts)
   end
 end
