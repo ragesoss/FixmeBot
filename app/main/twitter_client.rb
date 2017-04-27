@@ -50,8 +50,8 @@ class TwitterClient
     return article
   end
 
-  def import_recent_retweets
-    client.retweets_of_me.each do |rt|
+  def reply_to_recent_retweets
+    client.retweets_of_me(count: 3).each do |rt|
       client.retweeters_of(rt).each do |user|
         next if Reaction.exists?(retweeting_user: user.id, original_status: rt.id)
         reaction = Reaction.new(retweeting_user: user.id, original_status: rt.id)
