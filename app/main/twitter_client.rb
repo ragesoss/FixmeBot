@@ -38,19 +38,36 @@ class TwitterClient
 
   def add_id_to_tweeted_articles
     client.user_timeline('@FixmeBot').each do |t|
-      title = t.text[/"(.*)":/, 1]
-      article = Article.find_by(title: title)
-      article.twitter_status_id = t.id
-      article.save
+      add_id_to_article(t)
     end
+  end
+
+  def add_id_to_article(tweet)
+    title = t.text[/"(.*)":/, 1]
+    article = Article.find_by(title: title)
+    article.twitter_status_id = t.id
+    article.save
+    return article
   end
 
   def import_recent_retweets
     client.retweets_of_me.each do |rt|
       client.retweeters_of(rt).each do |user|
-        # create a Reaction
-        # reply to rt and user
+        next if Reaction.exists?(retweeting_user: user.id, original_status: rt.id)
+        reaction = Reaction.new(retweeting_user: user.id, original_status: rt.id)
+        reply_to_retweet(rt, user)
+        reaction.responded_at = Time.now
+        reaction.save
       end
     end
+  end
+
+  def reply_to_retweet(tweet, user)
+    opts = {
+      in_reply_to_status_id: tweet.id
+    }
+    article = add_id_to_article(tweet)
+    text = "@#{user.screen_name} thanks for the RT! Can you improve it? #{article.edit_url}"
+    client.update!(opts, text)
   end
 end
