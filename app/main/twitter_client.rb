@@ -51,7 +51,7 @@ class TwitterClient
     return article
   end
 
-  def cd
+  def reply_to_recent_retweets
     client.retweets_of_me(count: 3).each do |rt|
       client.retweeters_of(rt).each do |user|
         next if Reaction.exists?(retweeting_user: user.id, original_status: rt.id)
