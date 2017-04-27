@@ -22,7 +22,9 @@ class Tweet
   ###############
   def initialize(tweet)
     tc = TwitterClient.new
+    pp tweet
     tc.client.update(tweet)
+    pp 'tweeted'
     tc.add_id_to_tweeted_articles
   end
 
