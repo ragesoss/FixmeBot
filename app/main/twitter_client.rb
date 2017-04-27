@@ -45,12 +45,13 @@ class TwitterClient
   def add_id_to_article(tweet)
     title = tweet.text[/"(.*)":/, 1]
     article = Article.find_by(title: title)
+    return unless article
     article.twitter_status_id = tweet.id
     article.save
     return article
   end
 
-  def reply_to_recent_retweets
+  def cd
     client.retweets_of_me(count: 3).each do |rt|
       client.retweeters_of(rt).each do |user|
         next if Reaction.exists?(retweeting_user: user.id, original_status: rt.id)
@@ -67,6 +68,7 @@ class TwitterClient
       in_reply_to_status_id: tweet.id
     }
     article = add_id_to_article(tweet)
+    return unless article
     text = "@#{user.screen_name} thanks for the RT! Can you improve it? #{article.edit_url}"
     client.update!(text, opts)
   end
