@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170426025646) do
+ActiveRecord::Schema.define(version: 20170427033554) do
 
   create_table "articles", force: :cascade do |t|
     t.string   "title"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20170426025646) do
     t.boolean  "tweeted"
     t.boolean  "redirect"
     t.string   "twitter_status_id"
+    t.string   "retweeting_user"
   end
 
   create_table "reactions", force: :cascade do |t|
@@ -35,6 +36,6 @@ ActiveRecord::Schema.define(version: 20170426025646) do
     t.datetime "responded_at"
   end
 
-  add_index "reactions", ["twitter_status_id"], name: "index_reactions_on_twitter_status_id", unique: true
+  add_index "reactions", [nil, "original_status"], name: "index_reactions_on_retweeting_user_and_original_status", unique: true
 
 end
