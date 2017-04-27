@@ -31,7 +31,7 @@ class Datacycle
     if articles.count > 0
       Rails.logger.info "#{articles.count} tweetable prospect(s) found!"
     else
-      Rails.logger.info "no tweetable articles found in that cycle"
+      Rails.logger.debug "no tweetable articles found in that cycle"
     end
     Article.import articles
   end

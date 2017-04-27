@@ -71,5 +71,6 @@ class TwitterClient
     return unless article
     text = "@#{user.screen_name} thanks for the RT! Can you improve it? #{article.edit_url}"
     client.update!(text, opts)
+    Rails.logger.info "replied to retweet of #{article.title} by @#{user.screen_name}"
   end
 end
