@@ -44,8 +44,6 @@ class Article < ActiveRecord::Base
     "\"#{shortened_title}#{body}#{edit_url} #{ht}"
   end
 
-  private
-
   def escaped_title
     # CGI.escape will convert spaces to '+' which will break the URL
     CGI.escape(title.tr(' ', '_'))
