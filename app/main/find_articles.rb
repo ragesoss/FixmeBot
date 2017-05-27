@@ -26,6 +26,7 @@ class FindArticles
   def self.at_random(count: 100)
     # As of December 2015, recently created articles have page ids under
     # 50_000_000.
+    # Under 54_000_000 as of April 2017.
     ids = count.times.map { Random.rand(60_000_000) }
     by_ids(ids)
   end

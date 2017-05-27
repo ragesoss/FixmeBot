@@ -71,10 +71,13 @@ class Article < ActiveRecord::Base
     "https://en.wikipedia.org/wiki/#{escaped_title}?veaction=edit&summary=%23FixmeBot"
   end
 
+  # phantomjs rasterize.js 'https://en.wikipedia.org/wiki/Selfie' wikip.png 1000px*1000px
+
   def make_screenshot
-    webshot = Webshot::Screenshot.instance
-    webshot.capture mobile_url, "public/#{screenshot_path}",
-                    width: 800, height: 800, allowed_status_codes: [404]
+    %x[phantomjs ../rasterize.js #{mobile_url} public/#{screenshot_path} 1000px*1000px]
+    # webshot = Webshot::Screenshot.instance
+    # webshot.capture mobile_url, "public/#{screenshot_path}",
+    #                 width: 800, height: 800, allowed_status_codes: [404]
   end
 
   def hashtag
