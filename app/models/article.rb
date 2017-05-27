@@ -74,7 +74,7 @@ class Article < ActiveRecord::Base
   # phantomjs rasterize.js 'https://en.wikipedia.org/wiki/Selfie' wikip.png 1000px*1000px
 
   def make_screenshot
-    %x[phantomjs ../rasterize.js #{mobile_url} public/#{screenshot_path} 1000px*1000px]
+    %x[QT_QPA_PLATFORM=offscreen phantomjs ../rasterize.js #{mobile_url} public/#{screenshot_path} 1000px*1000px]
     # webshot = Webshot::Screenshot.instance
     # webshot.capture mobile_url, "public/#{screenshot_path}",
     #                 width: 800, height: 800, allowed_status_codes: [404]
