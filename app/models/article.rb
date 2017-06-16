@@ -22,7 +22,7 @@ class Article < ActiveRecord::Base
   ####################
   def tweet
     make_screenshot
-    screenshot = File.read screenshot_path
+    screenshot = File.open screenshot_path, 'rb'
     Tweet.new(tweet_text, media: screenshot)
     self.tweeted = true
     save
