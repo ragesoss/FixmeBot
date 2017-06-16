@@ -21,10 +21,14 @@ class Tweet
   ###############
   # Twitter API #
   ###############
-  def initialize(tweet)
+  def initialize(tweet, media: nil)
     tc = TwitterClient.new
     pp tweet
-    tc.client.update(tweet)
+    if media
+      tc.client.update_with_media(tweet, media)
+    else
+      tc.client.update(tweet)
+    end
     pp 'tweeted'
     tc.add_id_to_tweeted_articles
   end

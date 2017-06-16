@@ -21,14 +21,15 @@ class Article < ActiveRecord::Base
   # Instance methods #
   ####################
   def tweet
-    # make_screenshot
-    Tweet.new(tweet_text)
+    make_screenshot
+    screenshot = File.read screenshot_path
+    Tweet.new(tweet_text, media: screenshot)
     self.tweeted = true
     save
   end
 
   def screenshot_path
-    "screenshots/#{escaped_title}.png"
+    "public/screenshots/#{escaped_title}.png"
   end
 
   def twitter_card_description
@@ -75,9 +76,9 @@ class Article < ActiveRecord::Base
 
   def make_screenshot
     # Use rasterize script to make a screenshot
-    %x[phantomjs ../rasterize.js #{mobile_url} public/#{screenshot_path} 1000px*1000px]
+    %x[phantomjs ../rasterize.js #{mobile_url} #{screenshot_path} 1000px*1000px]
     # Trim any extra blank space, which may or may not be present.
-    %x[convert public/#{screenshot_path} -trim public/#{screenshot_path}]
+    %x[convert #{screenshot_path} -trim #{screenshot_path}]
   end
 
   def hashtag
