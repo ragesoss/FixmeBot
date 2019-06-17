@@ -10,7 +10,11 @@ class FixmeBot
 
   def tweet_something
     prepare_experiment
-    send_tweet
+    if @dry_run
+      pp tweet_text
+    else
+      send_tweet
+    end
   end
 
   def prepare_experiment
@@ -30,8 +34,8 @@ class FixmeBot
   def tweet_text
     # title + 2 + views + 31 + [1-2] + 6 + 23 + 1 + 6 =
     hashtag = @article.hashtag
-    views = "#{@article.average_views} views/day,"
-    "\"#{@article.title}\": #{views} #{edit_url} #{hashtag}"
+    views = "#{@article.average_views} views/day"
+    "\"#{@article.title}\": #{views}\n\n Please help improve it!\n\n #{edit_url} #{hashtag}"
   end
 
   def escaped_title
