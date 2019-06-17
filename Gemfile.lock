@@ -1,5 +1,7 @@
-PATH
-  remote: ../wikipedia_twitterbot
+GIT
+  remote: https://github.com/ragesoss/WikipediaTwitterbot
+  revision: 37bde7bd39668de30ee428da8c14b80b139dade9
+  branch: master
   specs:
     wikipedia_twitterbot (0.2.0)
       activerecord
