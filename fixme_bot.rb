@@ -20,10 +20,10 @@ class FixmeBot
   def prepare_experiment
     @control = Article.fetch_new_article(min_views: 100, max_wp10: 30, count: 10000)
     pp '--- CONTROL ---'
-    pp @control
+    pp @control.title
     @article = Article.fetch_new_article(min_views: 100, max_wp10: 30, count: 10000)
     pp '--- EXPERIMENT ---'
-    pp @article
+    pp @article.title
     Experiment.new_article_pair(@article, @control)
   end
 
