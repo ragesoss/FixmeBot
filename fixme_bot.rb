@@ -35,7 +35,7 @@ class FixmeBot
     # title + 2 + views + 31 + [1-2] + 6 + 23 + 1 + 6 =
     hashtag = @article.hashtag
     views = "#{@article.average_views} views/day"
-    "\"#{@article.title}\": #{views}\n\n Please help improve it!\n\n #{edit_url} #{hashtag}"
+    "\"#{@article.title}\": #{views.to_i}\n\n Please help improve it!\n\n #{edit_url} #{hashtag}"
   end
 
   def escaped_title
